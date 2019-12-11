@@ -1,0 +1,23 @@
+
+.custom-select-container {position:relative;}
+.custom-select-container:hover {cursor:pointer;}
+
+.custom-select-container .custom-select-list {margin:0; padding:0; list-style:none; overflow-y:auto; display:none; position:absolute; width:100%;}
+
+
+
+
+/* ------------------------------ */
+
+/* SETTINGS */
+.custom-select-container .custom-select-list {max-height:150px;}
+
+
+
+
+/* ------------------------------ */
+
+/* COLORS */
+.custom-select-container .custom-select-list {background-color:#fff;}
+
+
