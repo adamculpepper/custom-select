@@ -8,17 +8,15 @@ TODO
 */
 
 $(function() {
-	
-
 	var initSelects = function() {
 		$('.custom-select').each(function(e) {
 			var selectOptions = [];
 			var selectHtml = '';
-			var selectId = e;
+			var selectIndex = e;
 			var selectPlaceholder = $(this).attr('data-select-placeholder') || '';
-
-			//$(this).attr('data-select-id', selectId);
-
+			var selectTheme = $(this).attr('data-select-theme') || '';
+			console.warn(selectTheme);
+			//debugger;
 
 			$(this).find('option').each(function() {
 				var option = $(this);
@@ -31,7 +29,7 @@ $(function() {
 				});
 			});
 
-			$(this).wrap('<div class="custom-select-container" data-select-id="' + selectId + '">');
+			$(this).wrap('<div class="custom-select-container" data-select-id="' + selectIndex + '" data-select-theme="' + selectTheme + '">');
 
 			selectHtml += '<div class="custom-select-selected red">' + (selectPlaceholder != '' ? selectPlaceholder : selectOptions[0].text) + '</div>';
 			selectHtml += '<ul class="custom-select-list">';
@@ -42,61 +40,43 @@ $(function() {
 
 			selectHtml += '</ul>';
 
-
 			$(this).after(selectHtml);
-
-
 
 			console.table(selectOptions);
 		});
-
-
-
-
-
-		
 	}
-
-
 
 	$(document).on('click', '.custom-select-container > .custom-select-selected', function() {
 		$(this).addClass('blue');
 		$(this).find('+ .custom-select-list').addClass('green');
+		
+		var dropdownsOpen = $('.custom-select-list:visible').length;
+
+		if (dropdownsOpen > 0) {
+			$('.custom-select-list').hide();
+		}
+
 		$(this).find('+ .custom-select-list').show();
 	});
 
 	$(document).on('click', function(e) {
-		// var a = e;
-		// var b = e.target;
-		// var c = $(e.target).is('.custom-select-selected');
-		//debugger;
-
-		if ( !$(e.target).is('.custom-select-selected, .custom-select-list, .custom-select-list li') ) {
+		if ( !$(e.target).is('.custom-select-selected, .custom-select-list') ) {
 			$('.custom-select-list').hide();
 		}
 	});
-
 
 	$(document).on('click', '.custom-select-list li', function(e) {
 		var clicked = $(e.target);
 		var selectedText = clicked.text();
 		var selectedValue = clicked.attr('data-select-option-value');
-		var clickedSelectId = clicked.closest('.custom-select-container').attr('data-select-id');
+		var clickedSelectIndex = clicked.closest('.custom-select-container').attr('data-select-id');
 
-		var selectContainer = $('.custom-select-container[data-select-id=' + clickedSelectId + ']');
+		var selectContainer = $('.custom-select-container[data-select-id=' + clickedSelectIndex + ']');
 		selectContainer.find('.custom-select').val(selectedValue);
 		selectContainer.find('.custom-select-selected').text(selectedText);
-
-
 		//debugger;
 
 	});
-
-
-
-
-
-
 
 
 
@@ -104,6 +84,4 @@ $(function() {
 
 
 	initSelects();
-
-
 });

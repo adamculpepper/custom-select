@@ -1,23 +1,43 @@
+/*
+	Stylish Select
+	Developer: Adam Culpepper | @adamculpepper
+	https://github.com/adamculpepper/custom-select
+*/
 
+
+/* CORE STYLES */
 .custom-select-container {position:relative;}
 .custom-select-container:hover {cursor:pointer;}
 
-.custom-select-container .custom-select-list {margin:0; padding:0; list-style:none; overflow-y:auto; display:none; position:absolute; width:100%;}
-
-
-
+.custom-select-container .custom-select-list {display:none; position:absolute; z-index:1000; width:100%; margin:0; padding:0; list-style:none; overflow-y:auto;}
 
 /* ------------------------------ */
 
 /* SETTINGS */
 .custom-select-container .custom-select-list {max-height:150px;}
 
-
-
-
 /* ------------------------------ */
 
 /* COLORS */
 .custom-select-container .custom-select-list {background-color:#fff;}
 
+/* ------------------------------ */
 
+
+/* THEMES */
+
+.custom-select-container[data-select-theme='modern'] {border:5px solid purple;}
+
+/* Bootstrap 3 */
+.custom-select-container[data-select-theme='bootstrap3'] {}
+
+
+/* Bootstrap 4 */
+.custom-select-container[data-select-theme='bootstrap3'] {}
+
+/* Windows XP */
+.custom-select-container[data-select-theme='windowsxp'] {}
+
+
+/* Windows 10 */
+.custom-select-container[data-select-theme='windows10'] {}
