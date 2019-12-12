@@ -1,10 +1,12 @@
-// Custom Select
-// https://github.com/adamculpepper/custom-select
+// Stylish Select
+// Developer: Adam Culpepper | @adamculpepper
+// https://github.com/adamculpepper/stylish-select
 
 /*
 TODO
 - pull over classes that are on the initial <select> into the rendered version
 - active states
+- make into proper jQuery plugin
 */
 
 $(function() {
@@ -46,9 +48,6 @@ $(function() {
 	}
 
 	$(document).on('click', '.custom-select-container > .custom-select-selected', function(e) {
-		//$(this).addClass('blue');
-		//$(this).find('+ .custom-select-list').addClass('green');
-		
 		var dropdownsOpen = $('.custom-select-list:visible').length;
 
 		if (dropdownsOpen > 0) {
@@ -74,19 +73,12 @@ $(function() {
 		var selectContainer = $('.custom-select-container[data-select-id=' + clickedSelectIndex + ']');
 		selectContainer.find('.custom-select').val(selectedValue);
 		selectContainer.find('.custom-select-selected').text(selectedText);
-		//debugger;
-
 	});
 
 	var hideDropdowns = function() {
 		$('.custom-select-list').hide();
 		$('.custom-select-container').attr('data-select-state', 'closed');
 	}
-
-
-
-
-
 
 	initSelects();
 });
