@@ -4,7 +4,7 @@
 /*
 TODO
 - pull over classes that are on the initial <select> into the rendered version
-
+- active states
 */
 
 $(function() {
@@ -15,8 +15,6 @@ $(function() {
 			var selectIndex = e;
 			var selectPlaceholder = $(this).attr('data-select-placeholder') || '';
 			var selectTheme = $(this).attr('data-select-theme') || '';
-			console.warn(selectTheme);
-			//debugger;
 
 			$(this).find('option').each(function() {
 				var option = $(this);
@@ -29,9 +27,9 @@ $(function() {
 				});
 			});
 
-			$(this).wrap('<div class="custom-select-container" data-select-id="' + selectIndex + '" data-select-theme="' + selectTheme + '">');
+			$(this).wrap('<div class="custom-select-container" data-select-id="' + selectIndex + '" data-select-theme="' + selectTheme + '" data-select-state="closed">');
 
-			selectHtml += '<div class="custom-select-selected red">' + (selectPlaceholder != '' ? selectPlaceholder : selectOptions[0].text) + '</div>';
+			selectHtml += '<div class="custom-select-selected">' + (selectPlaceholder != '' ? selectPlaceholder : selectOptions[0].text) + '</div>';
 			selectHtml += '<ul class="custom-select-list">';
 
 			$.each(selectOptions, function(index, value) {
@@ -40,28 +38,30 @@ $(function() {
 
 			selectHtml += '</ul>';
 
+			$(this).hide();
 			$(this).after(selectHtml);
 
 			console.table(selectOptions);
 		});
 	}
 
-	$(document).on('click', '.custom-select-container > .custom-select-selected', function() {
-		$(this).addClass('blue');
-		$(this).find('+ .custom-select-list').addClass('green');
+	$(document).on('click', '.custom-select-container > .custom-select-selected', function(e) {
+		//$(this).addClass('blue');
+		//$(this).find('+ .custom-select-list').addClass('green');
 		
 		var dropdownsOpen = $('.custom-select-list:visible').length;
 
 		if (dropdownsOpen > 0) {
-			$('.custom-select-list').hide();
+			hideDropdowns();
 		}
 
 		$(this).find('+ .custom-select-list').show();
+		$(this).closest('.custom-select-container').attr('data-select-state', 'open');
 	});
 
 	$(document).on('click', function(e) {
 		if ( !$(e.target).is('.custom-select-selected, .custom-select-list') ) {
-			$('.custom-select-list').hide();
+			hideDropdowns();
 		}
 	});
 
@@ -77,6 +77,11 @@ $(function() {
 		//debugger;
 
 	});
+
+	var hideDropdowns = function() {
+		$('.custom-select-list').hide();
+		$('.custom-select-container').attr('data-select-state', 'closed');
+	}
 
 
 

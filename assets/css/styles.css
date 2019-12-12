@@ -7,13 +7,8 @@ body {
 	display:flex;
 	flex-direction:column;
 	font-family:'Roboto', sans-serif;
-	color:#222;
-	/* grid background, modified version of http://lea.verou.me/css3patterns/#checkerboard */
-	background-color:#f9f9f9;
-	background-image:linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), 
-	linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-	background-size:20px 20px;
-	background-position:0 0, 10px 10px;
+	color:#4c838b;
+	background-color:#fff;
 }
 
 a, button {transition:all 0.50s;}
@@ -30,20 +25,29 @@ input[type='email'] {width:100%;}
 .blue {background:lightblue!important;}
 .green {background:lightgreen!important;}
 
+h1, h2, h3, h4, h5, h6 {color:#48949f; font-weight:700;}
+
+.header-title h1,
+.header-title h2,
+.header-title h3,
+.header-title h4,
+.header-title h5,
+.header-title h6 {color:#7dabbd; font-weight:900;}
+
+
 
 /* ------------------------------ */
 
 /* Content Styles */
-header, footer {background:#555; padding:20px;}
+header, footer {background:#b9d8e4; padding:20px;}
 
 header, header a,
-footer, footer a {color:#ccc;}
-header a, footer a {display:inline-block; padding:5px 10px; background:rgba(255, 255, 255, 0.2);}
-header a:hover, footer a:hover {color:#222; background:rgba(255, 255, 255, 0.3);}
+footer, footer a {color:#4c838b;}
+header a, footer a {display:inline-block; padding:5px 10px; background-color:rgba(76, 131, 139, 0.20);}
+header a:hover, footer a:hover {color:#000; background-color:rgba(76, 131, 139, 0.40);}
 
 header .logo {font-size:30px;}
-header .logo a {color:#ddd; font-weight:bold; letter-spacing:1px;}
-header .logo a:hover {color:#fff;}
+header .logo a {font-weight:bold; letter-spacing:1px;}
 
 header #controls {font-size:20px;}
 
@@ -54,6 +58,12 @@ footer {font-size:25px; flex-shrink:0;}
 footer .row {width:100%;}
 
 #content {flex:1 0 auto;}
+
+.card {background-color:transparent; border:0;}
+
+.card h3 {font-size:25px;}
+
+.header-title {background-color:rgba(76, 131, 139, 0.10);}
 
 /* ------------------------------ */
 
