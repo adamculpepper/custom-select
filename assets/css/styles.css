@@ -8,7 +8,7 @@ body {
 	flex-direction:column;
 	font-family:'Roboto', sans-serif;
 	color:#4c838b;
-	background-color:#fff;
+	background-color:#eee;
 }
 
 a, button {transition:all 0.50s;}
@@ -59,7 +59,7 @@ footer .row {width:100%;}
 
 #content {flex:1 0 auto;}
 
-.card {background-color:transparent; border:0;}
+.card {/*background-color:transparent; border:0;*/}
 
 .card h3 {font-size:25px;}
 

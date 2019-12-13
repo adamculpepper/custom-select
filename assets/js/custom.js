@@ -1,0 +1,3 @@
+$(function() {
+	$('.stylish-select').stylishSelect();
+});

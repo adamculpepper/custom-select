@@ -8,6 +8,9 @@ https://github.com/adamculpepper/stylish-select
 .stylish-select-container {position:relative;}
 .stylish-select-container:hover {cursor:pointer;}
 
+.stylish-select-container,
+.stylish-select-container > select {max-width:100%;}
+
 .stylish-select-container > .stylish-select-selected {
 	padding:8px 10px;
 	background-color:#fff;
@@ -16,8 +19,19 @@ https://github.com/adamculpepper/stylish-select
 	background-size:13px 26px;
 	background-repeat:no-repeat;
 }
-.stylish-select-container > .stylish-select-list {display:none; position:absolute; z-index:1000; width:100%; margin:0; padding:0; list-style:none; overflow-y:auto;}
+.stylish-select-container > .stylish-select-list {display:none; position:absolute; z-index:1000; width:100%; margin:0; padding:0; list-style:none; overflow-y:auto; white-space:nowrap;}
 .stylish-select-container > .stylish-select-list > li {padding:0 10px; line-height:40px;}
+
+
+.stylish-select-container > .stylish-select-selected,
+.stylish-select-container > .stylish-select-list li {overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+
+
+.stylish-select-container[data-select-width=auto] {display:inline-block;}
+.stylish-select-container[data-select-width=auto] > .stylish-select-selected {padding-right:40px;}
+
+.stylish-select-container[data-select-width=auto] > .stylish-select-dropdown-sizer {position:absolute; list-style:none; padding:0;}
+.stylish-select-container[data-select-width=auto] > .stylish-select-dropdown-sizer ul { margin:0; padding:0; list-style:none;}
 
 /* ------------------------------ */
 
@@ -52,8 +66,8 @@ https://github.com/adamculpepper/stylish-select
 .stylish-select-container[data-select-theme='modern'] > .stylish-select-list > li:hover {background-color:rgba(0, 0, 0, 0.10); color:#000;}
 
 .stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar			{background-color:#ddd; width:10px;}
-.stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar-track		{background-color:#ddd;}
-.stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar-thumb		{background-color:#aaa;}
+.stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar-track	{background-color:#ddd;}
+.stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar-thumb	{background-color:#aaa;}
 .stylish-select-container[data-select-theme='modern'] > .stylish-select-list::-webkit-scrollbar-button	{display:none;}
 
 .highlighted {}
