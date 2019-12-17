@@ -2,17 +2,17 @@
 // Developer: Adam Culpepper | @adamculpepper
 // https://github.com/adamculpepper/stylish-select
 
-/*
-TODO
-- pull over classes that are on the initial <select> into the rendered version
-- active states
-- make into proper jQuery plugin
-*/
-
+// TODO
+// make into proper jQuery plugin - DONE
+// adding in options instead of data-attributes
+// active states
 
 $.fn.stylishSelect = function() {
-    //this.css( "color", "green" );
-    var selectContainerWidth = 0;
+	var select = this;
+	var selectContainerWidth = 0;
+	var selectOffsetWidth = 50; //arrow width or padding offset
+
+	this.addClass('stylish-select');
 
 	var initSelects = function() {
 		$('.stylish-select').each(function(e) {
@@ -21,7 +21,8 @@ $.fn.stylishSelect = function() {
 			var selectIndex = e;
 			var selectOptionPlaceholder = $(this).attr('data-select-placeholder') || '';
 			var selectOptionTheme = $(this).attr('data-select-theme') || '';
-			var selectOptionWidth = $(this).attr('data-select-width') || '';
+			var selectWidth = $(this).attr('data-select-width') || '';
+			var selectOptionWidth = $(this).attr('data-select-dropdown-width') || '';
 
 			$(this).find('option').each(function() {
 				var option = $(this);
@@ -34,7 +35,7 @@ $.fn.stylishSelect = function() {
 				});
 			});
 
-			$(this).wrap('<div class="stylish-select-container" data-select-id="' + selectIndex + '" data-select-theme="' + selectOptionTheme + '" data-select-width="' + selectOptionWidth + '" data-select-state="closed">');
+			$(this).wrap('<div class="stylish-select-container" data-select-id="' + selectIndex + '" data-select-theme="' + selectOptionTheme + '" data-select-width="' + selectWidth + '" data-select-dropdown-width="' + selectOptionWidth + '" data-select-state="closed">');
 
 			selectHtml += '<div class="stylish-select-selected">' + (selectOptionPlaceholder != '' ? selectOptionPlaceholder : selectOptions[0].text) + '</div>';
 			selectHtml += '<ul class="stylish-select-list">';
@@ -47,30 +48,31 @@ $.fn.stylishSelect = function() {
 
 			$(this).after(selectHtml);
 
-			//console.table(selectOptions);
-
 			if (selectOptionWidth == 'auto') {
-				var arrowWidth = 40;
+				var selectOptionHtml = '';
 
-				// create test element
-				var $test = $('<div class="stylish-select-dropdown-sizer">').html(selectHtml).css({
-					'border': '5px solid red',
+				$.each(selectOptions, function(index, value) {
+					selectOptionHtml += selectOptions[index].text + '<br>';
+				});
+
+				// create dummy element for dropdown sizing
+				var dummyWidthElement = $('<div class="stylish-select-dropdown-sizer">').html(selectOptionHtml).css({
 					'font-size': $(this).css('font-size'),	// ensures same size text.
 					'visibility': 'hidden'					// prevents FOUC
 				});
 
 				// add to parent, get width, and get out
-				$test.appendTo($(this).parent());
-				var width = $test.outerWidth();
+				dummyWidthElement.appendTo($(this).parent());
 
-				console.warn(width);
-				$test.remove();
+				var width = dummyWidthElement.outerWidth();
 
-				// set select width
-				$(this).closest('.stylish-select-container').width(width + arrowWidth);
+				dummyWidthElement.remove();
+
+				$(this).closest('.stylish-select-container').find('> .stylish-select-list').width(width + selectOffsetWidth);
 			}
 
 			$(this).hide();
+			console.table(selectOptions);
 		});
 	}
 
@@ -97,7 +99,7 @@ $.fn.stylishSelect = function() {
 		var selectedValue = clicked.attr('data-select-option-value');
 		var clickedSelectIndex = clicked.closest('.stylish-select-container').attr('data-select-id');
 		var selectContainer = $('.stylish-select-container[data-select-id=' + clickedSelectIndex + ']');
-		selectContainer.find('.stylish-select').val(selectedValue);
+		selectContainer.find('.stylish-select').val(selectedValue).trigger('change');;
 		selectContainer.find('.stylish-select-selected').text(selectedText);
 	});
 
@@ -109,7 +111,7 @@ $.fn.stylishSelect = function() {
 	});
 
 	var hideDropdowns = function() {
-		$('.stylish-select-list').hide();
+		$('.stylish-select-container > .stylish-select-list').hide();
 		$('.stylish-select-container').attr('data-select-state', 'closed');
 	}
 
